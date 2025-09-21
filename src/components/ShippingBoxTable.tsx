@@ -2,7 +2,7 @@ import React from 'react';
 
 import '../styles/boxTable.scss'
 
-const BoxList = ({ boxes }) => {
+const BoxList: React.FC<any> = ({ boxes }) => {
 
     if (boxes.length === 0) {
         return (

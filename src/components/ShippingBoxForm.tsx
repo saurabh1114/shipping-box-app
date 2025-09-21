@@ -5,27 +5,25 @@ import { saveBox } from '../services/storageService';
 
 import '../styles/addBoxForm.scss'
 
-interface BoxFormProps { onSave?: () => void }
-
-const BoxForm: React.FC<BoxFormProps> = ({ onSave }) => {
+const BoxForm: React.FC<any> = ({ onSave }) => {
   const [formData, setFormData] = useState({
     receiverName: '',
-    weight: '',
+    weight: 0,
     boxColor: '#000000',
     destinationCountry: ''
   });
   
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState< any>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Handle input changes
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     
     // Handle negative weight
     if (name === 'weight' && parseFloat(value) < 0) {
       setFormData(prev => ({ ...prev, [name]: '0' }));
-      setErrors(prev => ({ ...prev, [name]: 'Negative values not allowed. Set to 0.' }));
+      setErrors((prev: any) => ({ ...prev, [name]: 'Negative values not allowed. Set to 0.' }));
       return;
     }
     
@@ -33,13 +31,13 @@ const BoxForm: React.FC<BoxFormProps> = ({ onSave }) => {
     
     // Clear error when user types
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
+      setErrors((prev: any) => ({ ...prev, [name]: '' }));
     }
   };
 
   // Validate form
   const validateForm = () => {
-    const newErrors = {};
+    const newErrors: any = {};
     
     if (!formData.receiverName.trim()) {
       newErrors.receiverName = 'Receiver name is required.';
@@ -61,7 +59,7 @@ const BoxForm: React.FC<BoxFormProps> = ({ onSave }) => {
   };
 
   // Handle form submission
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     
     const validationErrors = validateForm();
@@ -75,11 +73,11 @@ const BoxForm: React.FC<BoxFormProps> = ({ onSave }) => {
     try {
       const boxToSave = {
         receiverName: formData.receiverName.trim(),
-        weight: parseFloat(formData.weight),
+        weight: formData.weight,
         boxColor: hexToRgb(formData.boxColor),
         boxColorHex: formData.boxColor,
         destinationCountry: formData.destinationCountry,
-        shippingCost: calculateShippingCost(parseFloat(formData.weight), formData.destinationCountry)
+        shippingCost: calculateShippingCost(formData.weight, formData.destinationCountry)
       };
       
       saveBox(boxToSave);
@@ -89,14 +87,14 @@ const BoxForm: React.FC<BoxFormProps> = ({ onSave }) => {
       // Reset form
       setFormData({
         receiverName: '',
-        weight: '',
+        weight: 0,
         boxColor: '#000000',
         destinationCountry: ''
       });
       setErrors({});
       
       alert('Box saved successfully!');
-      onSave();
+      onSave?.();
       
     } catch (error) {
       console.error('Error saving box:', error);

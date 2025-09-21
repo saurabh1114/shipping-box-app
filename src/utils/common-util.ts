@@ -1,8 +1,9 @@
-import { SHIPPING_RATES } from '../constants';
+import { getShippingRate } from '../constants';
 
 // Calculate shipping cost
 export const calculateShippingCost = (weight: any, country: any) => {
-  return (weight * SHIPPING_RATES[country]).toFixed(2);
+  
+  return (weight * getShippingRate(country)).toFixed(2);
 };
 
 // Convert hex color to RGB format
