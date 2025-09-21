@@ -188,7 +188,7 @@ const BoxForm: React.FC<any> = ({ onSave }) => {
               <option value="">Select destination country</option>
               {Object.entries(SHIPPING_RATES).map(([country, rate]) => (
                 <option key={country} value={country}>
-                  {country} (₹{rate} per kg)
+                  {country} (INR {rate} per kg)
                 </option>
               ))}
             </select>
