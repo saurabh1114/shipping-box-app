@@ -1,0 +1,117 @@
+@import '_variables';
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem;
+}
+
+.form-container {
+  background-color: $gray-50;
+  padding: 2rem;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-lg;
+  max-width: 500px;
+  width: 100%;
+
+  .form-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: $gray-900;
+    text-align: center;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+
+    label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: $gray-700;
+    }
+
+    .input,
+    select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1.5px solid $gray-300;
+      border-radius: $radius-md;
+      font-size: 0.95rem;
+      outline: none;
+      background-color: $gray-50;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+      &:focus {
+        border-color: $primary-500;
+        box-shadow: 0 0 0 3px rgba($primary-500, 0.15);
+      }
+
+      &.error {
+        border-color: $error;
+      }
+    }
+
+    .error-text {
+      color: $error;
+      font-size: 0.8rem;
+      margin-top: 0.25rem;
+      display: block;
+    }
+  }
+
+  // Color Picker
+  .color-picker-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    .color-picker {
+      width: 50px;
+      height: 40px;
+      border: none;
+      cursor: pointer;
+      background: none;
+    }
+
+    .color-preview {
+      width: 40px;
+      height: 40px;
+      border-radius: $radius-md;
+      border: 1px solid $gray-300;
+    }
+  }
+
+  .hint-text {
+    font-size: 0.85rem;
+    color: $gray-500;
+    margin-top: 0.25rem;
+  }
+
+  // Submit button
+  .submit-btn {
+    width: 100%;
+    padding: 0.9rem 1.2rem;
+    background-color: $primary-500;
+    color: $gray-50;
+    border: none;
+    border-radius: $radius-md;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+
+    &:hover:not(.disabled) {
+      background-color: $primary-600;
+      transform: translateY(-1px);
+    }
+
+    &.disabled {
+      background-color: mix(white, $primary-500, 25%); // simple lighten
+      cursor: not-allowed;
+    }
+  }
+}
+
